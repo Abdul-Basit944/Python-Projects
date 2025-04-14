@@ -1,0 +1,20 @@
+import requests
+import json
+import pyttsx3
+
+engine = pyttsx3.init()
+
+city = input("Enter Your City: ")
+
+url = f"http://api.weatherapi.com/v1/current.json?key=0068d0dcd91a467696a175633251404&q={city}"
+
+r = requests.get(url)
+
+if r.status_code == 200:
+    w_dic = json.loads(r.text)
+    w = w_dic["current"]["temp_c"]
+    engine.say(f"The current weather in {city} is {w} degrees Celsius.")
+    engine.runAndWait()
+else:
+    engine.say("Sorry, I couldn't fetch the weather information.")
+    engine.runAndWait()
