@@ -1,0 +1,14 @@
+import pyttsx3
+
+if __name__ == "__main__":
+    print("Welcome to Robo Speaker Created by Abdul Basit")
+    engine = pyttsx3.init()
+
+    while True:
+        name = input("Enter What You Want Me To Speak (or Q to quit): ")
+        if name.upper() == "Q":
+            engine.say("Goodbye!")
+            engine.runAndWait()
+            break
+        engine.say(name)
+        engine.runAndWait()
