@@ -1,0 +1,90 @@
+class Bank_Account:
+    def __init__(self, Account_Number, Account_holder_name, Balance=0):
+        self.Account_Number = Account_Number
+        self.Account_holder_name = Account_holder_name
+        self.Balance = Balance
+        print(f'Account created for {self.Account_holder_name}.')
+
+    def deposit(self, Amount):
+        if Amount > 0:
+            self.Balance += Amount
+            print(f"Deposit successful. New balance: {self.Balance}")
+        else:
+            print("Enter a valid amount.")
+
+    def withdraw(self, Amount):
+        if 0 < Amount <= self.Balance:
+            self.Balance -= Amount
+            print(f"Withdrawal successful. Remaining balance: {self.Balance}")
+        else:
+            print("Insufficient funds or invalid amount.")
+
+    def display(self):
+        print(f"Account Number: {self.Account_Number}")
+        print(f"Account Holder: {self.Account_holder_name}")
+        print(f"Balance: {self.Balance}")
+
+accounts = {}
+
+def create_account():
+    acc_num = input("Enter account number: ")
+    name = input("Enter account holder name: ")
+    if acc_num in accounts:
+        print("Account already exists!")
+    else:
+        account = Bank_Account(acc_num, name)
+        accounts[acc_num] = account
+        print("Account successfully created.")
+
+def view_account():
+    acc_num = input("Enter account number: ")
+    if acc_num in accounts:
+        accounts[acc_num].display()
+    else:
+        print("Account not found.")
+
+def deposit_to_account():
+    acc_num = input("Enter account number: ")
+    if acc_num in accounts:
+        try:
+            amount = float(input("Enter amount to deposit: "))
+            accounts[acc_num].deposit(amount)
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+    else:
+        print("Account not found.")
+
+def withdraw_from_account():
+    acc_num = input("Enter account number: ")
+    if acc_num in accounts:
+        try:
+            amount = float(input("Enter amount to withdraw: "))
+            accounts[acc_num].withdraw(amount)
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+    else:
+        print("Account not found.")
+
+while True:
+    print("\n---Welcome to Basit Bank ---")
+    print("1. Create Account")
+    print("2. View Account")
+    print("3. Deposit")
+    print("4. Withdraw")
+    print("5. Exit")
+
+    choice = input("Enter your choice (1-5): ")
+
+    if choice == '1':
+        create_account()
+    elif choice == '2':
+        view_account()
+    elif choice == '3':
+        deposit_to_account()
+    elif choice == '4':
+        withdraw_from_account()
+    elif choice == '5':
+        print("Thank you for using the Basit Bank. Goodbye!")
+        break
+    else:
+        print("Invalid choice. Please select from 1 to 5.")
