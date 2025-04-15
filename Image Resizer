@@ -1,0 +1,19 @@
+import cv2
+
+src = cv2.imread("C:\\Users\\walee\\Downloads\\data eng.png", cv2.IMREAD_UNCHANGED)
+
+if src is None:
+    print("Image not found or path is incorrect.")
+    exit()
+
+cv2.imshow("image", src)
+
+scale_percent = 30
+width = int(src.shape[1] * scale_percent / 100)
+height = int(src.shape[0] * scale_percent / 100)
+
+output = cv2.resize(src, (width, height))
+cv2.imwrite('newimage.png', output)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
