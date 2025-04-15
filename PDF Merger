@@ -1,0 +1,15 @@
+import PyPDF2
+
+pdfiles = [
+    r"c:\Users\walee\Downloads\Profile.pdf",
+    r"c:\Users\walee\Downloads\AbdulBasit GOOGLE CERTIFICATE.pdf"
+]
+
+merger = PyPDF2.PdfMerger()
+
+for filename in pdfiles:
+    with open(filename, 'rb') as pdfile:
+        merger.append(pdfile)  # append needs the file object, not a PdfReader
+
+merger.write("merger.pdf")
+merger.close()
